@@ -2,7 +2,7 @@ using EspacioPresupuestosDetalle;
 
 namespace EspacioPresupuestos
 {
-    public class Presupuestos
+    public class Presupuesto
     {
         private int IdPresupuesto;
         private string nombreDestinatario;

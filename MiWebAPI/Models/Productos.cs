@@ -1,6 +1,6 @@
 namespace EspacioProductos
 {
-    public class Productos
+    public class Producto
     {
         private int idProducto;
         private string descripcion;
