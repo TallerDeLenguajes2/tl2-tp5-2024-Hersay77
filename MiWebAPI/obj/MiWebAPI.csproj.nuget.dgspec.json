@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj": {}
+    "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj": {
+    "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
+        "projectUniqueName": "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
         "projectName": "MiWebAPI",
-        "projectPath": "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
+        "projectPath": "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
         "packagesPath": "C:\\Users\\HERNAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\obj\\",
+        "outputPath": "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HERNAN\\AppData\\Roaming\\NuGet\\NuGet.Config"

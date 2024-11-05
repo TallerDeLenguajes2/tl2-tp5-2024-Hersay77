@@ -5,30 +5,30 @@ namespace EspacioPresupuestoRepository
 {
     public class PresupuestoRepository
     {
-        public void CrearPresupuesto(Presupuesto presupuesto)
+        public bool CrearPresupuesto(Presupuesto presupuesto)
         {
-
+            return true;
         }
 
-        public List<Presupuesto> ListarPresupuestos()
+        public List<Presupuesto> ObtenerPresupuestos()
         {
             var lista = new List<Presupuesto>();
             return lista;
         }
 
-        public Presupuesto ObtenerDetalles(int id)
+        public Presupuesto ObtenerPresupuesto(int id)
         {
             var presupuesto = new Presupuesto();
 
             return presupuesto;
         }
 
-        public void AgregarProductoYCantidad(int id)
+        public bool AgregarProductoYCantidad(int idPresupuesto, int idProducto, int cantidad)
         {
-
+            return true;
         }
 
-        public void EliminarPresupuesto(int id)
+        public void EliminarPresupuesto(int idPresupuesto)
         {
 
         }

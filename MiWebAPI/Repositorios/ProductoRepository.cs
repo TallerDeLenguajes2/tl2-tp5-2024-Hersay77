@@ -3,27 +3,26 @@ using EspacioProductos;
 
 namespace EspacioProductoRepository
 {
-    public class EspacioProductoRepository
+    public class ProductoRepository
     {
-
         public void CrearProducto(Producto producto)
         {
             
         }
 
-        public void ModificarProducto(int Id, Producto producto)
+        public void ModificarProducto(int idProducto, Producto producto)
         {
 
         }
 
-        public List<Producto> ListarProductos()
+        public List<Producto> ObtenerProductos()
         {
             var lista = new List<Producto>();
 
             return lista;
         }
 
-        public Producto ObtenerDetalle(int id)
+        public Producto ObtenerProducto(int idProducto)
         {
             var producto = new Producto();
 
