@@ -1,10 +1,16 @@
 using EspacioPresupuestos;
 using Microsoft.Data.Sqlite;
+using EspacioIPresupuestoRepository;
 
 namespace EspacioPresupuestoRepository
 {
-    public class PresupuestoRepository
+    public class PresupuestoRepository : IPresupuestosRepository
     {
+        private string cadenaDeConexion;
+        public PresupuestoRepository(string cadenaDeConexion) //constructor del repositorio recibe la cadena de conexion
+        {
+            this.cadenaDeConexion = cadenaDeConexion;
+        }
         public bool CrearPresupuesto(Presupuesto presupuesto)
         {
             return true;

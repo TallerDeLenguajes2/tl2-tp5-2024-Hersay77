@@ -1,7 +1,6 @@
 using EspacioProductoRepository;
 using EspacioProductos;
 using Microsoft.AspNetCore.Mvc;
-namespace tl2_tp5_2024_Hersay77.Controller;
 
 [ApiController]
 [Route("[controller]")]
