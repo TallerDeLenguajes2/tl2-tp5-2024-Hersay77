@@ -61,6 +61,26 @@ namespace EspacioPresupuestoRepository
         public List<Presupuesto> ObtenerPresupuestos()
         {
             var lista = new List<Presupuesto>();
+            string query = @"SELECT 
+                            P.idPresupuesto,
+                            P.NombreDestinatario,
+                            P.FechaCreacion
+                            FROM 
+                            Presupuestos P;";
+            using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+            {
+                connection.Open(); //abro conexion
+                SqliteCommand command = new SqliteCommand(query, connection);
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Presupuesto presupuesto = new Presupuesto(Convert.ToInt32(reader["idPresupuesto"]), reader["NombreDestinatario"].ToString(), Convert.ToDateTime(reader["FechaCreacion"]));
+                        lista.Add(presupuesto);
+                    }
+                }
+                connection.Close();
+            }
             return lista;
         }
 
@@ -91,13 +111,11 @@ namespace EspacioPresupuestoRepository
                 command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
-                    bool esPrimeraFila = true;
                     while (reader.Read())
                     {
-                        if (esPrimeraFila)
+                        if (presupuesto == null)
                         {
                             presupuesto = new Presupuesto(Convert.ToInt32(reader["idPresupuesto"]), reader["NombreDestinatario"].ToString(), Convert.ToDateTime(reader["FechaCreacion"]));
-                            esPrimeraFila = false; //para no volver a guardar estos datos ya que la consulta devuelve filas con estos datos nuevamente para otro presupuesto de otro producto si es que hubiese
                         }
                         Producto producto = new Producto(Convert.ToInt32(reader["idProducto"]), reader["Producto"].ToString(), Convert.ToInt32(reader["Precio"]));
                         PresupuestosDetalle detalle = new PresupuestosDetalle(producto, Convert.ToInt32(reader["Cantidad"]));
