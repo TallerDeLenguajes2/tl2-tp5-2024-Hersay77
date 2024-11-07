@@ -1,5 +1,5 @@
 using EspacioPresupuestoRepository;
-
+using EspacioPresupuestos;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,6 +12,13 @@ public class PresupuestosController : ControllerBase
     public PresupuestosController()
     {
         presupuestoRepository = new PresupuestoRepository("Data Source=db/Tienda.db;Cache=Shared"); //Instancia de repositorio producto, envio la cadena de conexion
+    }
+
+    [HttpPost("api/Presupuesto")]
+    public ActionResult CrearPresupuesto([FromBody] Presupuesto presupuesto)
+    {
+        if (!presupuestoRepository.CrearPresupuesto(presupuesto)) return BadRequest();
+        return Created();
     }
 
 }
