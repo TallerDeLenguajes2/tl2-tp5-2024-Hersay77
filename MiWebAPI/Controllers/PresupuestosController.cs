@@ -33,6 +33,20 @@ public class PresupuestosController : ControllerBase
         return Ok(presupuestoRepository.ObtenerPresupuesto(id));
     }
 
+    [HttpPost("api/Presupuesto/{id}/ProductoDetalle")]
+    public ActionResult AgregarProductoYCantidadAlPresupuesto(int id, int idProducto, int cantidad)
+    {
+        if (!presupuestoRepository.AgregarProductoYCantidad(id, idProducto, cantidad)) return BadRequest();
+        return Created();
+    }
+
+    [HttpDelete("api/Presupuesto/{id}/EliminarPresupuesto")]
+    public ActionResult EliminarPresupuesto(int id)
+    {
+        if (!presupuestoRepository.EliminarPresupuesto(id)) return BadRequest();
+        return Ok();
+    }
+
 }
 
 

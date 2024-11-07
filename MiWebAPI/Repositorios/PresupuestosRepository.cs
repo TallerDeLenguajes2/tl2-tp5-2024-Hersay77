@@ -130,12 +130,46 @@ namespace EspacioPresupuestoRepository
 
         public bool AgregarProductoYCantidad(int idPresupuesto, int idProducto, int cantidad)
         {
+            ProductoRepository productoRepository = new ProductoRepository(cadenaDeConexion);
+            if (ObtenerPresupuesto(idPresupuesto) == null || productoRepository.ObtenerProducto(idProducto) == null) //Control que exista el presupuesto y el producto
+            {
+                return false;
+            }
+            string query = @"INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @cantidad);";
+            using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+            {
+                connection.Open(); //abro conexion
+                SqliteCommand command = new SqliteCommand(query, connection);
+                command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+                command.Parameters.AddWithValue("@idProducto", idProducto);
+                command.Parameters.AddWithValue("@cantidad", cantidad);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
             return true;
         }
 
-        public void EliminarPresupuesto(int idPresupuesto)
+        public bool EliminarPresupuesto(int idPresupuesto)
         {
-
+            if (ObtenerPresupuesto(idPresupuesto) == null) //Control que exista el presupuesto 
+            {
+                return false;
+            }
+            string query = @"DELETE FROM Presupuestos WHERE idPresupuesto = @idPresupuesto;";
+            string query2 = @"DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPresupuesto;";
+            using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+            {
+                connection.Open();
+                SqliteCommand command = new SqliteCommand(query, connection);
+                SqliteCommand command2 = new SqliteCommand(query2, connection);
+                command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+                command2.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+                command2.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return true;
         }
     }
 }
