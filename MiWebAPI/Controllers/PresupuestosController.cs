@@ -21,6 +21,12 @@ public class PresupuestosController : ControllerBase
         return Created();
     }
 
+    [HttpGet("api/Presupuesto/{id}")]
+    public ActionResult<Presupuesto> ObtenerPresupuesto(int id)
+    {
+        return Ok(presupuestoRepository.ObtenerPresupuesto(id));
+    }
+
 }
 
 

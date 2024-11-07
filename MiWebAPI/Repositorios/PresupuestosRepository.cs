@@ -2,6 +2,8 @@ using EspacioPresupuestos;
 using Microsoft.Data.Sqlite;
 using EspacioIPresupuestoRepository;
 using EspacioProductoRepository;
+using EspacioProductos;
+using EspacioPresupuestosDetalle;
 
 namespace EspacioPresupuestoRepository
 {
@@ -45,7 +47,7 @@ namespace EspacioPresupuestoRepository
                 SqliteCommand command2 = new SqliteCommand(query2, connection); //comando con la consulta y conexion
                 foreach (var detalle in presupuesto.Detalle)
                 {
-                    
+
                     command2.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
                     command2.Parameters.AddWithValue("@idProducto", detalle.Producto.IdProducto);
                     command2.Parameters.AddWithValue("@Cantidad", detalle.Cantidad);
@@ -62,9 +64,48 @@ namespace EspacioPresupuestoRepository
             return lista;
         }
 
-        public Presupuesto ObtenerPresupuesto(int id)
+        public Presupuesto ObtenerPresupuesto(int idPresupuesto)
         {
-            var presupuesto = new Presupuesto();
+            Presupuesto presupuesto = null;
+            string query = @"SELECT 
+                            P.idPresupuesto,
+                            P.NombreDestinatario,
+                            P.FechaCreacion,
+                            PR.idProducto,
+                            PR.Descripcion AS Producto,
+                            PR.Precio,
+                            PD.Cantidad,
+                            (PR.Precio * PD.Cantidad) AS Subtotal
+                        FROM
+                            Presupuestos P
+                        JOIN
+                            PresupuestosDetalle PD ON P.idPresupuesto = PD.idPresupuesto
+                        JOIN
+                            Productos PR ON PD.idProducto = PR.idProducto
+                        WHERE
+                            P.idPresupuesto = @idPresupuesto";
+            using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+            {
+                connection.Open(); //abro conexion
+                SqliteCommand command = new SqliteCommand(query, connection);
+                command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    bool esPrimeraFila = true;
+                    while (reader.Read())
+                    {
+                        if (esPrimeraFila)
+                        {
+                            presupuesto = new Presupuesto(Convert.ToInt32(reader["idPresupuesto"]), reader["NombreDestinatario"].ToString(), Convert.ToDateTime(reader["FechaCreacion"]));
+                            esPrimeraFila = false; //para no volver a guardar estos datos ya que la consulta devuelve filas con estos datos nuevamente para otro presupuesto de otro producto si es que hubiese
+                        }
+                        Producto producto = new Producto(Convert.ToInt32(reader["idProducto"]), reader["Producto"].ToString(), Convert.ToInt32(reader["Precio"]));
+                        PresupuestosDetalle detalle = new PresupuestosDetalle(producto, Convert.ToInt32(reader["Cantidad"]));
+                        presupuesto.Detalle.Add(detalle);
+                    }
+                }
+                connection.Close();
+            }
 
             return presupuesto;
         }
