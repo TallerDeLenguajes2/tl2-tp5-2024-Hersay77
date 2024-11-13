@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S35IHA02Rww=",
+  "dgSpecHash": "K28lI+TwHbc=",
   "success": true,
-  "projectFilePath": "c:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
+  "projectFilePath": "C:\\Hersay\\Repositorios\\tl2-tp5-2024-Hersay77\\MiWebAPI\\MiWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HERNAN\\.nuget\\packages\\microsoft.data.sqlite\\8.0.10\\microsoft.data.sqlite.8.0.10.nupkg.sha512",
     "C:\\Users\\HERNAN\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.10\\microsoft.data.sqlite.core.8.0.10.nupkg.sha512",

@@ -27,18 +27,20 @@ namespace EspacioPresupuestos
 
         }
 
-        public float MontoPresupuesto()
+        public double MontoPresupuesto()
         {
-            return 0;
+            int monto = detalle.Sum(d => d.Cantidad * d.Producto.Precio); //a función Sum() acumula los resultados de todas las multiplicaciones (Cantidad * Precio) para cada elemento en la colección detalle y devuelve la suma total. 
+            return monto;
+
         }
 
-        public float MontoPresupuestoConIva()
+        public double MontoPresupuestoConIva()
         {
-            return 0;
+            return MontoPresupuesto() * 1.21;
         }
         public int CantidadProductos()
         {
-            return 0;
+            return detalle.Sum(d => d.Cantidad);
         }
 
     }
